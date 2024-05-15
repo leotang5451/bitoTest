@@ -24,7 +24,14 @@ type SinglePerson struct {
 // 使用者列表
 var SinglePersonList []SinglePerson
 
-// 新增匹配
+// @Summary 新增匹配
+// @Description 新增匹配
+// @Tags singlePerson
+// @Accept json
+// @Produce json
+// @Param request.AddSinglePersonAndMatchReq body request.AddSinglePersonAndMatchReq true "新增匹配"
+// @Success 1 {object} response.BaseResponse "新增成功"
+// @Router /singlePerson/addSinglePersonAndMatch [post]
 func AddSinglePersonAndMatchHandler(c *gin.Context) {
 	req := request.AddSinglePersonAndMatchReq{}
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -79,7 +86,14 @@ func AddSinglePersonAndMatchHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, resp)
 }
 
-// 查詢匹配
+// @Summary 查詢匹配
+// @Description 查詢匹配
+// @Tags singlePerson
+// @Accept json
+// @Produce json
+// @Param limit query int true "可匹配數量"
+// @Success 1 {array} SinglePerson "查詢可匹配數量"
+// @Router /singlePerson/querySinglePeople [get]
 func GetSinglePeopleHandler(c *gin.Context) {
 	limitStr := c.Query("limit")
 	limit, err := strconv.Atoi(limitStr)
@@ -107,7 +121,14 @@ func GetSinglePeopleHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, resp)
 }
 
-// 移除匹配
+// @Summary 移除匹配
+// @Description 移除匹配
+// @Tags singlePerson
+// @Accept json
+// @Produce json
+// @Param request.RemoveSinglePersonReq body request.RemoveSinglePersonReq true "userId"
+// @Success 1 {object} response.BaseResponse "移除成功"
+// @Router /singlePerson/removeSinglePerson [delete]
 func RemoveSinglePersonHandler(c *gin.Context) {
 	req := request.RemoveSinglePersonReq{}
 	if err := c.ShouldBindJSON(&req); err != nil {

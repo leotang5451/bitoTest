@@ -8,7 +8,10 @@ const (
 )
 
 type BaseResponse struct {
-	Data  interface{} `json:"data,omitempty"`
-	Code  string      `json:"code,omitempty"`
-	Error string      `json:"err,omitempty"`
+	//匹配資料
+	Data interface{} `json:"data,omitempty"`
+	//1:成功 2:匹配成功 -1:錯誤 -2:匹配失敗
+	Code string `json:"code,omitempty"`
+	//錯誤訊息
+	Error string `json:"err,omitempty"`
 }

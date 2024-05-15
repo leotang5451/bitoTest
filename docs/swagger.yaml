@@ -1,0 +1,121 @@
+definitions:
+  handler.SinglePerson:
+    properties:
+      gender:
+        description: 性別 0:男 1:女
+        type: string
+      height:
+        description: 身高
+        type: number
+      name:
+        description: 姓名
+        type: string
+      number_want_date:
+        description: 人數
+        type: integer
+      user_id:
+        description: id
+        type: integer
+    type: object
+  request.AddSinglePersonAndMatchReq:
+    properties:
+      gender:
+        description: 性別 0:男 1:女
+        type: string
+      height:
+        description: 身高
+        type: number
+      name:
+        description: 姓名
+        type: string
+      number_want_date:
+        description: 人數
+        type: integer
+    type: object
+  request.RemoveSinglePersonReq:
+    properties:
+      user_id:
+        type: integer
+    type: object
+  response.BaseResponse:
+    properties:
+      code:
+        description: 1:成功 2:匹配成功 -1:錯誤 -2:匹配失敗
+        type: string
+      data:
+        description: 匹配資料
+      err:
+        description: 錯誤訊息
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /singlePerson/addSinglePersonAndMatch:
+    post:
+      consumes:
+      - application/json
+      description: 新增匹配
+      parameters:
+      - description: 新增匹配
+        in: body
+        name: request.AddSinglePersonAndMatchReq
+        required: true
+        schema:
+          $ref: '#/definitions/request.AddSinglePersonAndMatchReq'
+      produces:
+      - application/json
+      responses:
+        "1":
+          description: 新增成功
+          schema:
+            $ref: '#/definitions/response.BaseResponse'
+      summary: 新增匹配
+      tags:
+      - singlePerson
+  /singlePerson/querySinglePeople:
+    get:
+      consumes:
+      - application/json
+      description: 查詢匹配
+      parameters:
+      - description: 可匹配數量
+        in: query
+        name: limit
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "1":
+          description: 查詢可匹配數量
+          schema:
+            items:
+              $ref: '#/definitions/handler.SinglePerson'
+            type: array
+      summary: 查詢匹配
+      tags:
+      - singlePerson
+  /singlePerson/removeSinglePerson:
+    delete:
+      consumes:
+      - application/json
+      description: 移除匹配
+      parameters:
+      - description: userId
+        in: body
+        name: request.RemoveSinglePersonReq
+        required: true
+        schema:
+          $ref: '#/definitions/request.RemoveSinglePersonReq'
+      produces:
+      - application/json
+      responses:
+        "1":
+          description: 移除成功
+          schema:
+            $ref: '#/definitions/response.BaseResponse'
+      summary: 移除匹配
+      tags:
+      - singlePerson
+swagger: "2.0"
